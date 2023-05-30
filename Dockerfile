@@ -1,15 +1,33 @@
-# Stage 1
-FROM python:3.11-slim as base
+FROM rocker/r-base:latest
 
-ENV PYTHONUNBUFFERED 1
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    sudo \
+    libcurl4-gnutls-dev \
+    libcairo2-dev \
+    libxt-dev \
+    libssl-dev \
+    libssh2-1-dev \
+    libgdal-dev \
+    libproj-dev \
+    libgeos-dev \
+    libudunits2-dev \
+    netcdf-bin \    
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update
+RUN R -e "install.packages(c('shiny', 'shinyjs', 'data.table','sf','dplyr','tidyr', 'leaflet', 'leaflet.extras2'), repos='http://cran.rstudio.com/')"
 
-ADD requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
+RUN addgroup --system app \
+    && adduser --system --ingroup app app
 
-ADD . /app
-WORKDIR /app
+WORKDIR /home/app
+
+COPY . .
+
+RUN chown app:app -R /home/app
+
+USER app
+
+EXPOSE 3838
 
 ARG BUILD_DATE
 ARG REVISION
@@ -22,6 +40,4 @@ LABEL revision $REVISION
 LABEL vendor "Democracia en Red & Reflejar"
 LABEL title "Pesticidas introducidos silenciosamente"
 
-EXPOSE 8050
-
-CMD [ "gunicorn", "main:app.server", "--bind", "0.0.0.0:8050", "--chdir=/app", "--timeout", "1800" ]
+CMD ["R", "-e", "shiny::runApp('/home/app/app.R')"]
