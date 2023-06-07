@@ -33,7 +33,7 @@ Abrí una terminal del sistema en el directorio raiz del proyecto y ejecutá la 
 
 
 ```bash
-$ Rscript -e "shiny::runApp('apps')"
+$ Rscript -e "shiny::runApp('apps/<app-deseada>')"
 ```
 
 ### 2 - Docker
