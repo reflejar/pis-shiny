@@ -24,19 +24,17 @@ Esto se fija si tenés instalado renv y si no está lo instala. Luego activa el 
 Por último ejecuta la aplicación
 
 ```bash
-$ Rscript setup/dev.R
-$ Rscript -e "shiny::runApp('run-dev.R')"
+$ Rscript setup.R
 ```
 
 #### Ejecución
 
-Abrí una terminal del sistema en el directorio raiz del proyecto y ejecutá la plataforma
+Abrí una terminal del sistema en el directorio raiz del proyecto y ejecutá la aplicación que necesites
 
 
 ```bash
-$ Rscript -e "shiny::runApp('run-dev.R')"
+$ Rscript -e "shiny::runApp('apps')"
 ```
-
 
 ### 2 - Docker
 

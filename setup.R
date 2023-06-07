@@ -24,25 +24,6 @@ install_if_needed <- function(pkgs) {
   }
 }
 
-
-# Se instala renv para aislar las librerias
-if (is_installed("renv") == FALSE) {
-    message("Intentando instalar renv")
-    install.packages("renv")
-} else {
-    message("renv se encuentra instalado")
-}
-
-# Chequeamos si existe la carpeta renv
-if (!dir.exists("renv")) {
-    message("Inicializando entorno virtual")
-    renv::init()
-}
-
-# Activamos el entorno
-renv::activate()
-
-
 PKGS <- c('shiny', 'shinyjs', 'data.table','units', 'sf','dplyr','tidyr', 'leaflet', 'leaflet.extras2', 'arrow', 'sfarrow')
 
 # Core packages

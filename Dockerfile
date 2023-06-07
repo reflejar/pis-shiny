@@ -26,9 +26,9 @@ RUN R -e "install.packages(c('leaflet.extras2'))"
 RUN R -e "install.packages(c('arrow'))"
 RUN R -e "install.packages(c('sfarrow'))"
 
-RUN rm -rf /srv/shiny-server/sample-apps
+RUN rm -rf /srv/shiny-server
 
-COPY . /srv/shiny-server/
+COPY apps/ /srv/shiny-server/
 
 ARG BUILD_DATE
 ARG REVISION

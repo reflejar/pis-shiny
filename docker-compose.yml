@@ -7,6 +7,6 @@ services:
       context: .
     image: pis-shiny:latest
     volumes:
-      - .:/srv/shiny-server/
+      - ./apps:/srv/shiny-server/
     ports:
       - "3838:3838"
