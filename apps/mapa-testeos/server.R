@@ -5,14 +5,15 @@ library(shinyjs)
 library(sfarrow)
 library(arrow)
 
-honeycomb_count=st_read_parquet("./data/hexagonos.parquet")
-df=read_parquet("./data/puntos.parquet")
+honeycomb_count=st_read_parquet("data/hexagonos.parquet")
+df=read_parquet("data/puntos.parquet")
 
 palette <- colorBin('Reds', domain = honeycomb_count$n_colli, bins = 5)
 # palette(0)
 # palette(4)
 
 hover=lapply(honeycomb_count$Tooltip, htmltools::HTML)
+
 
 style <- "
   .hexbin-hexagon {
@@ -50,15 +51,8 @@ style_hidden <- "
 
   }
 "
-# Define UI
-ui <- fluidPage(
-  tags$head(tags$style(style)),
-  uiOutput("style"),
-  leafletOutput("map")
-)
-
-# Define server
-server <- function(input, output, session) {
+# Define server logic required to draw a histogram
+shinyServer(function(input, output) {
   prev_zoom <- reactiveVal(NULL)
 
   # Create a Leaflet map
@@ -141,20 +135,4 @@ server <- function(input, output, session) {
     prev_zoom(zoom)
     
   })
-}
-
-# Run the app
-shinyApp(ui, server)
-
-
-
-
-
-
-
-
-
-
-
-
-
+})

@@ -1,4 +1,4 @@
-FROM rocker/r-base:latest
+FROM ghcr.io/rocker-org/shiny:4.3
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
@@ -14,20 +14,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     netcdf-bin \    
     && rm -rf /var/lib/apt/lists/*
 
-RUN R -e "install.packages(c('shiny', 'shinyjs', 'data.table','sf','dplyr','tidyr', 'leaflet', 'leaflet.extras2'), repos='http://cran.rstudio.com/')"
 
-RUN addgroup --system app \
-    && adduser --system --ingroup app app
+RUN R -e "install.packages(c('shinyjs'))"
+RUN R -e "install.packages(c('data.table'))"
+RUN R -e "install.packages(c('units'))"
+RUN R -e "install.packages(c('sf'))"
+RUN R -e "install.packages(c('dplyr'))"
+RUN R -e "install.packages(c('tidyr'))"
+RUN R -e "install.packages(c('leaflet'))"
+RUN R -e "install.packages(c('leaflet.extras2'))"
+RUN R -e "install.packages(c('arrow'))"
+RUN R -e "install.packages(c('sfarrow'))"
 
-WORKDIR /home/app
+RUN rm -rf /srv/shiny-server/sample-apps
 
-COPY . .
-
-RUN chown app:app -R /home/app
-
-USER app
-
-EXPOSE 3838
+COPY . /srv/shiny-server/
 
 ARG BUILD_DATE
 ARG REVISION
@@ -39,5 +40,3 @@ LABEL revision $REVISION
 
 LABEL vendor "Democracia en Red & Reflejar"
 LABEL title "Pesticidas introducidos silenciosamente"
-
-CMD ["R", "-e", "shiny::runApp('/home/app/app.R')"]
