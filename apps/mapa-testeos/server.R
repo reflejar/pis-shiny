@@ -4,16 +4,29 @@ library(leaflet.extras2)
 library(shinyjs)
 library(sfarrow)
 library(arrow)
+library(sf)
 
-honeycomb_count=st_read_parquet("data/hexagonos.parquet")
-df=read_parquet("data/puntos.parquet")
+honeycomb_count=st_read_parquet("./data/hexagonos.parquet")
+df=read_parquet("./data/puntos.parquet")
+
+# Calculate the bounding box of the points
+bbox <- st_bbox(honeycomb_count)
+
+# Calculate the center of the bounding box
+bbox_sf <- st_as_sfc(bbox)
+center <- st_centroid(bbox_sf)
+
+# Extract the latitude and longitude from the center coordinates
+coords <- st_coordinates(center)
+lat <- coords[2]
+long <- coords[1]
+
 
 palette <- colorBin('Reds', domain = honeycomb_count$n_colli, bins = 5)
 # palette(0)
 # palette(4)
 
 hover=lapply(honeycomb_count$Tooltip, htmltools::HTML)
-
 
 style <- "
   .hexbin-hexagon {
@@ -51,15 +64,16 @@ style_hidden <- "
 
   }
 "
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   prev_zoom <- reactiveVal(NULL)
 
   # Create a Leaflet map
   output$map <- renderLeaflet({
-    leaflet(options = providerTileOptions(minzoom = 1, maxzoom = 10))%>%
+    leaflet()%>%setView(lat = lat,lng=long,zoom = 6)%>%
       addMapPane("HexPane",zIndex = 420)%>%
-      addPolygons(data=honeycomb_count,fillColor = ~palette(n_colli),
+      addPolygons(data = honeycomb_count,fillColor = ~palette(n_colli),
                   label = hover,popup = hover,
                   popupOptions = popupOptions(maxHeight ="300",minWidth = "200",
                                               closeOnClick = TRUE),
@@ -73,9 +87,11 @@ shinyServer(function(input, output) {
                     opacity = 1.0,
                     bringToFront = TRUE,
                     sendToBack = TRUE), )%>%
+      # Set the detail group to only appear when zoomed in
+      groupOptions("Hex", zoomLevels = 9:18)%>%
       addTiles()%>%
       addHexbin(lng = df$Long, lat = df$Lat,opacity=0.7,
-                options = hexbinOptions(pointerEvents = "all",duration=0,colorRange =c("#FEE5D9", "#A50F15"),radiusRange = c(20, 20),tooltip = "Total "))
+                options = hexbinOptions(pointerEvents = "all",duration=0,colorRange =c("#FEE5D9", "#A50F15"),radiusRange = c(20, 20),tooltip =  JS("function(d) {return '<b>Testeos Positivos: ' + d.length +'</b><br>' +'Zoom para más información';} ")))
   })
   
   #Hacer zoom cuando el usuario clickea en el mapa
@@ -103,7 +119,7 @@ shinyServer(function(input, output) {
         # removeUI(selector = "div.hexbin-tooltip")
         leafletProxy("map") %>%
           # hideHexbin()%>%
-          showGroup("Hex") %>%
+          # showGroup("Hex") %>%
         #   # clearGroup("Hex2")%>%
           updateHexbin(colorRange = c("#fcfcfc00","#fcfcfc00"))
           # clearHexbin()
@@ -120,7 +136,7 @@ shinyServer(function(input, output) {
         
         # removeClass(selector = "g.hexbin-container", class = "hidden")
         leafletProxy("map") %>%
-          hideGroup("Hex")%>%
+          # hideGroup("Hex")%>%
           updateHexbin(colorRange = c("#FEE5D9", "#A50F15"))
           # showHexbin()
           # addHexbin(lng = df$Long, lat = df$Lat,opacity = 0.7,

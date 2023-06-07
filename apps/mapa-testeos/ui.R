@@ -45,8 +45,7 @@ style_hidden <- "
 shinyUI(fluidPage(
   tags$head(tags$style(style)),
   uiOutput("style"),
-  leafletOutput("map"),
-  h3("Hola saimonn como le va")
+  leafletOutput("map")
 ))
 
 
