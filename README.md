@@ -1,4 +1,4 @@
-![Header](assets/img/ryder_isologotipos.png)
+![Header](apps/www/img/ryder_isologotipos.png)
 
 # PIS - Aplicaciones Shiny
 

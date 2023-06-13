@@ -43,9 +43,30 @@ style_hidden <- "
 "
 
 shinyUI(fluidPage(
+  includeCSS("../www/bootstrap.min.css", rel = 'stylesheet'),
+  tags$link(rel = 'stylesheet', type = 'text/css', href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css'),
+
   tags$head(tags$style(style)),
   uiOutput("style"),
-  leafletOutput("map")
+  leafletOutput("map"),
+  tags$footer(
+    fluidRow(
+      tags$div(
+          column(
+              tags$div(
+                tags$a(tags$i(class="bi bi-twitter"), href="https://twitter.com/fundacionDER",target="_blank", class="btn mx-3 btn-lg btn-floating"),
+                tags$a(tags$i(class="bi bi-instagram"), href="https://www.instagram.com/democraciaenred/",target="_blank", class="btn mx-3 btn-lg btn-floating"),
+                tags$a(tags$i(class="bi bi-facebook"), href="https://www.facebook.com/democraciaenred",target="_blank", class="btn mx-3 btn-lg btn-floating"),
+                tags$a(tags$i(class="bi bi-linkedin"), href="https://www.linkedin.com/company/democracia-en-red/",target="_blank", class="btn mx-3 btn-lg btn-floating"),
+                class="text-center"
+              ),
+              width=12
+          ),
+      ),
+    ),
+    class="text-white position-relative pb-5 container",
+    id="footer",
+  ),
 ))
 
 
