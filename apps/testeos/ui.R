@@ -76,20 +76,35 @@ shinyUI(fluidPage(
           tags$div(
             fluidRow(
               tags$div(
-                tags$img(alt="Isotipo de PIS", height="70px", src="../www/img/PIS_isologo_negro.png")
+                tags$img(alt="Isotipo de PIS", height="70px", src="../www/img/PIS_isologo_negro.png"),
                 class="col-lg-2"
               ),
               tags$div(
                 "PIS es un proyecto de",
-                tags$a()
+                tags$a(
+                  "Democracia en Red",
+                  href="https://democraciaenred.org",
+                  target="_blank"
+                ),
+                ",",
+                tags$br(),
+                "una ONG con base en Buenos Aires, Argentina.",
                 class="col-lg-10"
               )
-            )
+            ),
             class="col-lg-6"
-          )
-        )
+          ),
+          tags$div(
+            tags$a(
+              "Explorá las demás herramientas",
+              class="btn btn-outline-light text-uppercase",
+              href="https://pis.org.ar"
+            ),
+            class="col-lg-6 text-end"
+          )          
+        ),
         class="container"
-      )
+      ),
       class="text-white position-relative py-4",
       id="footer"
   ),
