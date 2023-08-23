@@ -25,6 +25,8 @@ RUN R -e "install.packages(c('leaflet'))"
 RUN R -e "install.packages(c('leaflet.extras2'))"
 RUN R -e "install.packages(c('arrow'))"
 RUN R -e "install.packages(c('sfarrow'))"
+RUN R -e "install.packages(c('shinyWidgets'))"
+RUN R -e "install.packages(c('fontawesome'))"
 
 RUN rm -rf /srv/shiny-server
 

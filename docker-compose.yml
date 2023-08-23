@@ -5,7 +5,7 @@ services:
   app: &app
     build:
       context: .
-    image: pis-shiny:latest
+    image: ghcr.io/reflejar/pis-shiny:latest
     volumes:
       - ./apps:/srv/shiny-server/
     ports:
