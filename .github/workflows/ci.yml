@@ -1,5 +1,5 @@
 # version 1.0
-name: CI/CD - Build and push to DockerHub
+name: CI - Build and push to Github Container Registry
 on:
   push:
     tags:
@@ -16,7 +16,7 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Docker image
         with:
-          image: anopa/pis-shiny
-          registry: docker.io
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }} 
+          image: pis-shiny
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }} 
