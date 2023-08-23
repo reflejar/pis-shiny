@@ -2,6 +2,7 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 library(shinyjs)
+library(shinyWidgets)
 library(sfarrow)
 library(arrow)
 
@@ -43,18 +44,19 @@ style_hidden <- "
 "
 
 shinyUI(fluidPage(
-  # includeCSS("../www/bootstrap.min.css", rel = 'stylesheet'),
+  # includeCSS("../assets/bootstrap.min.css", rel = 'stylesheet'),
   suppressDependencies("bootstrap"),
-  theme="../www/bootstrap.min.css",
+  theme="../assets/bootstrap.min.css",
   tags$link(rel = 'stylesheet', type = 'text/css', href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css'),
-  tags$head(
-    tags$style(style)
-  ),
+  tags$head(tags$style(style)),
+  tags$link(rel = "stylesheet", href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"),
 
+
+  # NAVBAR
   tags$nav(
       tags$div(
         tags$a(
-          tags$img(alt="Isotipo de PIS", height="70px", src="../www/img/PIS_isologo_negro.png")
+          tags$img(alt="Isotipo de PIS", height="70px", src="../assets/img/PIS_isologo_negro.png")
         ),
         tags$nav(
           tags$a("Volver a PIS",class="btn text-uppercase", href="https://pis.org.ar"),
@@ -65,18 +67,52 @@ shinyUI(fluidPage(
       class="text-primary navbar navbar-expand-md navbar-light bg-light fixed-top",
   ),
   uiOutput("style"),
+
+  # CONTENIDO
   tags$div(
-    leafletOutput("map"),
-    class="my-5 mx-5 min-vh-100"
+
+    fluidRow(
+      tags$div(
+        tags$div(
+          tags$h4(
+            "Mapa colaborativo de testeos",
+            class="text-white text-uppercase pt-2"
+          ),
+          tags$p(
+            "Investigación de 200 casos realizados en las localidades de Lobos, Mar Chiquita , Saladillo, Barrio Nicole (La matanza) y CABA para la detección de plaguicidas en humanos.",
+            class="mt-5"
+          ),  
+          tags$div(
+            materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T),
+            materialSwitch(inputId = "switch2", label = "Testeos Ambientales Iconos", status = "primary",value=F),
+            class="mt-5"
+          ),
+          class="mt-5 container"
+        ),
+        class="col-lg-3 col-md-12"
+      ),
+
+      tags$div(
+        tags$div(
+          leafletOutput("map", width = "100%", height = "600px"),
+          class="mt-5"
+        ),
+        class="col-lg-9 col-md-12"
+      ),
+      class="mt-5"
+    ),
+    
+    class="my-5 mx-5 min-vh-75"
   ),
-  
+
+  # FOOTER
   tags$footer(
       tags$div(
         fluidRow(
           tags$div(
             fluidRow(
               tags$div(
-                tags$img(alt="Isotipo de PIS", height="70px", src="../www/img/PIS_isologo_negro.png"),
+                tags$img(alt="Isotipo de PIS", height="70px", src="../assets/img/PIS_isologo_negro.png"),
                 class="col-lg-2"
               ),
               tags$div(
@@ -108,6 +144,9 @@ shinyUI(fluidPage(
       class="text-white position-relative py-4",
       id="footer"
   ),
+
+  
+
 ))
 
 

@@ -8,8 +8,31 @@
 </head>
 <body>
 
-    <h1><a href="/testeos">Mapa de Testeos</a></h1>
-    <h1><a href="/zonificacion">Mapa de zonificación normativa</a></h1>
+    <div id="tools">
+        
+    </div>
+
+    <script>
+        var originHost = window.location.hostname;
+
+        var hostParts = originHost.split('.');
+        console.log(hostParts)
+
+        var subdomain = hostParts[0];
+        console.log(subdomain)
+        switch (subdomain){
+        case "testeos":
+            window.location.href = "/testeos";
+        case "localhost":
+            var tools = document.getElementById("tools");
+                tools.innerHTML = `
+                <h1><a href="/testeos">Mapa de Testeos</a></h1>
+                <h1><a href="/zonificacion">Mapa de zonificación normativa</a></h1>
+                `;
+        default:
+            console.log("Opción no reconocida");
+        }
+    </script>
 
 </body>
 </html>
