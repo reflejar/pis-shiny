@@ -182,15 +182,15 @@ shinyServer(function(input, output, session) {
   # Hide the marker layer when zoom level is greater than 16
   observeEvent(input$map_zoom,{
     zoom <- input$map_zoom
-    if(is.null(prev_zoom())){
-      # prev_zoom()
-    }else{
+    #if(is.null(prev_zoom())){
+    #  # prev_zoom()
+    #}else{
       
       
       
       if (input$switch1) {
          print(zoom)
-        print(prev_zoom())
+        #print(prev_zoom())
         if (zoom >= 9 ) {
           print("Remove")
           # addClass(selector = "div.hexbin-tooltip", class = "hidden")
@@ -231,7 +231,7 @@ shinyServer(function(input, output, session) {
         }
       }
       
-    }
+    #}
 
     
     prev_zoom(zoom)

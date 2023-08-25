@@ -137,7 +137,7 @@ ui <- fluidPage(
     rel = "stylesheet", 
     href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"
   ),
-  materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=F),
+  materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T),
   materialSwitch(inputId = "switch2", label = "Testeos Ambientales Iconos", status = "primary",value=F),
   uiOutput("style"),
   leafletOutput("map", width = "80%", height = "600px")
@@ -150,12 +150,13 @@ server <- function(input, output, session) {
     tags$style(style_hidden)
   })
   
+  initial_zoom=7
   prev_zoom <- reactiveVal(NULL)
 
   pal <- colorFactor(palette = c("blue", "red", "#0ea603"), domain = amb$type)
   # Create a Leaflet map
   output$map <- renderLeaflet({
-    leaflet()%>%setView(lat = lat,lng=long,zoom = 7)%>%
+    leaflet()%>%setView(lat = lat,lng=long,zoom = initial_zoom)%>%
       addMapPane("HexPane",zIndex = 400)%>%
       addPolygons(data=honeycomb_count,fillColor = ~palette(n_colli),
                   label = hover,popup = hover,
@@ -190,15 +191,15 @@ server <- function(input, output, session) {
   # Hide the marker layer when zoom level is greater than 16
   observeEvent(input$map_zoom,{
     zoom <- input$map_zoom
-    if(is.null(prev_zoom())){
-      # prev_zoom()
-    }else{
+    # if(is.null(prev_zoom())){
+    #   # prev_zoom()
+    # }else{
       
       
       
       if (input$switch1) {
          print(zoom)
-        print(prev_zoom())
+        # print(prev_zoom())
         if (zoom >= 9 ) {
           print("Remove")
           # addClass(selector = "div.hexbin-tooltip", class = "hidden")
@@ -239,7 +240,7 @@ server <- function(input, output, session) {
         }
       }
       
-    }
+    # }
 
     
     prev_zoom(zoom)
