@@ -5,30 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicial</title>
+
+    <style>
+        html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000000; /* Color de fondo opcional */
+    }
+
+    /* Estilos para el contenedor de la imagen */
+    .centrar-imagen {
+        text-align: center;
+    }
+    .image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-animation:spin 4s linear infinite;
+        -moz-animation:spin 4s linear infinite;
+        animation:spin 4s linear infinite;
+    }
+    @-moz-keyframes spin { 
+        100% { -moz-transform: rotate(360deg); } 
+    }
+    @-webkit-keyframes spin { 
+        100% { -webkit-transform: rotate(360deg); } 
+    }
+    @keyframes spin { 
+        100% { 
+            -webkit-transform: rotate(360deg); 
+            transform:rotate(360deg); 
+        } 
+    }
+
+    </style>
+
 </head>
 <body>
 
-    <div id="tools">
-        
+    <div class="centrar-imagen">
+        <img class="image" alt="Isotipo de PIS" height="50px" src="assets/img/PIS_isologo_negro.png">
     </div>
 
     <script>
-        var originHost = window.location.hostname;
-
-        var hostParts = originHost.split('.');
-        console.log(hostParts)
-
+        var hostParts = window.location.hostname.split('.');
         var subdomain = hostParts[0];
-        console.log(subdomain)
         switch (subdomain){
         case "testeos":
             window.location.href = "/testeos";
-        case "localhost":
-            var tools = document.getElementById("tools");
-                tools.innerHTML = `
-                <h1><a href="/testeos">Mapa de Testeos</a></h1>
-                <h1><a href="/zonificacion">Mapa de zonificación normativa</a></h1>
-                `;
         default:
             console.log("Opción no reconocida");
         }
