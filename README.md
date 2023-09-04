@@ -6,6 +6,12 @@ Aplicaciones realizadas en R shiny para proyecto PIS de Democracia en Red
 
 - Módulo de Testeos
 
+
+## Manual de integración
+
+El presente repositorio forma parte de un proyecto que integra múltiples tecnologías. Para conocer más accedé a nuestro [Manual de integración](https://github.com/reflejar/pis-manual)
+
+
 ## Setup
 
 Hay 2 maneras de preparar el entorno para desarrollo. A través de un entorno virtual con renv, o a través de Docker
