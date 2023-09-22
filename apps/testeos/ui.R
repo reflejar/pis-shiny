@@ -45,6 +45,7 @@ style_hidden <- "
 
 shinyUI(fluidPage(
   # includeCSS("../assets/bootstrap.min.css", rel = 'stylesheet'),
+  tags$meta(name="viewport", content="width=device-width, initial-scale=1"),
   suppressDependencies("bootstrap"),
   theme="../assets/bootstrap.min.css",
   tags$link(rel = 'stylesheet', type = 'text/css', href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css'),
@@ -80,12 +81,18 @@ shinyUI(fluidPage(
           ),
           tags$p(
             "Investigación de 200 casos realizados en las localidades de Lobos, Mar Chiquita , Saladillo, Barrio Nicole (La matanza) y CABA para la detección de plaguicidas en humanos.",
-            class="mt-5"
+            class="mt-5 text-white"
           ),  
           tags$div(
-            materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T),
-            materialSwitch(inputId = "switch2", label = "Testeos Ambientales Iconos", status = "primary",value=F),
-            class="mt-5"
+            materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T, right = T),
+            materialSwitch(inputId = "switch2", label = "Testeos Ambientales Iconos", status = "primary",value=F, right = T),
+            class="mt-5 text-white"
+          ),
+          tags$a(
+            "Doná Información",
+            href="https://donaronline.org/democracia-en-red/campana-recaudacion-proyecto-pis",
+            target="_blank",
+            class="btn btn-primary text-black mt-5"
           ),
           class="mt-5 container"
         ),
@@ -102,43 +109,38 @@ shinyUI(fluidPage(
       class="mt-5"
     ),
     
-    class="my-5 mx-5 min-vh-75"
+    class="my-5 container min-vh-75"
   ),
 
   # FOOTER
   tags$footer(
       tags$div(
-        fluidRow(
-          tags$div(
             fluidRow(
               tags$div(
                 tags$img(alt="Isotipo de PIS", height="70px", src="../assets/img/PIS_isologo_negro.png"),
-                class="col-lg-2"
+                tags$p(
+                  "PIS es un proyecto de",
+                  tags$a(
+                    "Democracia en Red",
+                    href="https://democraciaenred.org",
+                    target="_blank"
+                  ),
+                  ",",
+                  tags$br(),
+                  "una ONG con base en Buenos Aires, Argentina.",
+                  class="mx-4"
+                  ),
+                class="col-lg-6 d-flex align-items-center"
               ),
               tags$div(
-                "PIS es un proyecto de",
                 tags$a(
-                  "Democracia en Red",
-                  href="https://democraciaenred.org",
-                  target="_blank"
+                  "Explorá las demás herramientas",
+                  class="btn btn-outline-light text-uppercase",
+                  href="https://pis.org.ar"
                 ),
-                ",",
-                tags$br(),
-                "una ONG con base en Buenos Aires, Argentina.",
-                class="col-lg-10"
-              )
+                class="col-lg-6 text-end mt-3"
+              )          
             ),
-            class="col-lg-6"
-          ),
-          tags$div(
-            tags$a(
-              "Explorá las demás herramientas",
-              class="btn btn-outline-light text-uppercase",
-              href="https://pis.org.ar"
-            ),
-            class="col-lg-6 text-end"
-          )          
-        ),
         class="container"
       ),
       class="text-white position-relative py-4",
