@@ -44,10 +44,10 @@ style_hidden <- "
 "
 
 shinyUI(fluidPage(
-  # includeCSS("assets/bootstrap.min.css", rel = 'stylesheet'),
+  # includeCSS("bootstrap.min.css", rel = 'stylesheet'),
   tags$meta(name="viewport", content="width=device-width, initial-scale=1"),
   suppressDependencies("bootstrap"),
-  theme="assets/bootstrap.min.css",
+  theme="bootstrap.min.css",
   tags$link(rel = 'stylesheet', type = 'text/css', href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css'),
   tags$head(tags$style(style)),
   tags$link(rel = "stylesheet", href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"),
@@ -57,7 +57,7 @@ shinyUI(fluidPage(
   tags$nav(
       tags$div(
         tags$a(
-          tags$img(alt="Isotipo de PIS", height="70px", src="assets/img/PIS_isologo_negro.png")
+          tags$img(alt="Isotipo de PIS", height="70px", src="img/PIS_isologo_negro.png")
         ),
         tags$nav(
           tags$a("Volver a PIS",class="btn text-uppercase", href="https://pis.org.ar"),
@@ -85,7 +85,7 @@ shinyUI(fluidPage(
           ),  
           tags$div(
             materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T, right = T),
-            materialSwitch(inputId = "switch2", label = "Testeos Ambientales Iconos", status = "primary",value=F, right = T),
+            materialSwitch(inputId = "switch2", label = "Testeos Ambientales Iconos", status = "primary",value=T, right = T),
             class="mt-5 text-white"
           ),
           tags$a(
@@ -117,7 +117,7 @@ shinyUI(fluidPage(
       tags$div(
             fluidRow(
               tags$div(
-                tags$img(alt="Isotipo de PIS", height="70px", src="assets/img/PIS_isologo_negro.png"),
+                tags$img(alt="Isotipo de PIS", height="70px", src="img/PIS_isologo_negro.png"),
                 tags$p(
                   "PIS es un proyecto de",
                   tags$a(
