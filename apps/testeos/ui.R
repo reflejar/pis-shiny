@@ -71,42 +71,60 @@ shinyUI(fluidPage(
 
   # CONTENIDO
   tags$div(
+    tags$div(
+        tags$div(
+          tags$h3(
+            "Mapa colaborativo de testeos",
+            tags$a("V 1.0", href="#metodologia-testeos", class="btn btn-sm text-primary"),
+            class="text-white pt-3 fw-bolder space-grotesk"
+          ),
+          tags$br(),
+          tags$p(
+            "Resultados de análisis e informes de trazas de agroquímicos. Buscá en el mapa y observá la presencia de agroquímicos en humanos, agua y territorios de la provincia de Buenos Aires.",
+            class="text-white poppins"
+          ),
+          class="col-12 mt-5"          
+        ),
+        class="row"
+    ),
 
-    fluidRow(
+    tags$div(
       tags$div(
         tags$div(
-          tags$h4(
-            "Mapa colaborativo de testeos",
-            class="text-white text-uppercase pt-2"
-          ),
-          tags$p(
-            "Investigación de 200 casos realizados en las localidades de Lobos, Mar Chiquita , Saladillo, Barrio Nicole (La matanza) y CABA para la detección de plaguicidas en humanos.",
-            class="mt-5 text-white"
-          ),  
+
           tags$div(
             materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T, right = T),
             materialSwitch(inputId = "switch2", label = "Testeos Ambientales Iconos", status = "primary",value=T, right = T),
-            class="mt-5 text-white"
+            class="mt-3 mb-5 text-white"
+          ),
+          tags$img(alt="Línea", src="img/linea.svg", class="mt-5 mb-3"),
+          tags$p(
+            "SUMÁ RASTROS DE PIS",
+            tags$br(),
+            "Este mapa se construye colaborativamente con estudios, informes e investigaciones provenientes de distintas fuentes. Tiene un enfoque colectivo, participativo y abierto por lo que podes",  
+            tags$a("descargar el dataset", href="#"),
+            "del mapa o aportar información de análisis aquí.",
+            class="text-white poppins"            
           ),
           tags$a(
-            "Doná Información",
+            tags$b("Sumá tus datos"),
             href="https://donaronline.org/democracia-en-red/campana-recaudacion-proyecto-pis",
             target="_blank",
-            class="btn btn-primary text-black mt-5"
+            class="btn btn-primary text-black mt-2"
           ),
-          class="mt-5 container"
+          class="container"
         ),
-        class="col-lg-3 col-md-12"
+        class="col-lg-4 col-md-12"
       ),
 
       tags$div(
         tags$div(
-          leafletOutput("map", width = "100%", height = "600px"),
-          class="mt-5"
+          leafletOutput("map", width = "100%", height = "450px"),
+          class="mt-3"
         ),
-        class="col-lg-9 col-md-12"
+        class="col-lg-8 col-md-12"
       ),
-      class="mt-5"
+      class="row"
     ),
     
     class="my-5 container min-vh-75"

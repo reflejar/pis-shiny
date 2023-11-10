@@ -6,6 +6,8 @@ services:
     build:
       context: .
     image: ghcr.io/reflejar/pis-shiny:latest
+    volumes:
+      - ./apps/testeos:/srv/shiny-server
     ports:
       - "3838:3838"
     environment:
