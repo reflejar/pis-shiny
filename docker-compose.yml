@@ -2,11 +2,14 @@ version: '3'
 
 
 services:
-  app: &app
+  testeos:
     build:
       context: .
     image: ghcr.io/reflejar/pis-shiny:latest
     volumes:
-      - ./apps:/srv/shiny-server/
+      - ./apps/testeos/ui.R:/srv/shiny-server/ui.R
+      - ./apps/testeos/server.R:/srv/shiny-server/server.R
     ports:
       - "3838:3838"
+    environment:
+      - APP_CONFIG=testeos

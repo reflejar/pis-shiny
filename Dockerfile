@@ -30,7 +30,12 @@ RUN R -e "install.packages(c('fontawesome'))"
 
 RUN rm -rf /srv/shiny-server
 
-COPY apps/ /srv/shiny-server/
+WORKDIR /srv/shiny-server
+COPY apps/ /apps
+COPY assets/ www
+
+COPY config.sh /config.sh
+RUN chmod +x /config.sh
 
 ARG BUILD_DATE
 ARG REVISION
@@ -42,3 +47,5 @@ LABEL revision $REVISION
 
 LABEL vendor "Democracia en Red & Reflejar"
 LABEL title "Pesticidas introducidos silenciosamente"
+
+CMD ["/bin/bash", "-c", "/config.sh && /usr/bin/shiny-server"]

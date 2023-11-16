@@ -1,4 +1,4 @@
-![Header](apps/assets/img/ryder_isologotipos.png)
+![Header](assets/img/ryder_isologotipos.png)
 
 # PIS - Aplicaciones Shiny
 
@@ -16,7 +16,31 @@ El presente repositorio forma parte de un proyecto que integra múltiples tecnol
 
 Hay 2 maneras de preparar el entorno para desarrollo. A través de un entorno virtual con renv, o a través de Docker
 
-### 1 - Entorno virtual (renv)
+### 1 - Docker
+
+> #### ⚠️ Prerequisitos
+> 
+> Este entorno virtual requiere de:
+> - [Docker](https://docs.docker.com/engine/install/_) y (docker) compose (que en las nuevas versiones ya viene en la instalación de docker)
+
+#### Instalación
+
+Abrí una terminal del sistema en el directorio raiz del proyecto y construí la imagen de docker
+
+```bash
+$ docker compose build
+```
+
+#### Ejecución
+
+Abrí una terminal del sistema en el directorio raiz del proyecto y ejecutá la imagen en un contenedor
+
+```bash
+$ docker compose up
+```
+
+
+### 2 - Entorno virtual (renv)
 
 > #### ⚠️ Prerequisitos
 > 
@@ -42,28 +66,6 @@ Abrí una terminal del sistema en el directorio raiz del proyecto y ejecutá la 
 $ Rscript -e "shiny::runApp('apps/<app-deseada>')"
 ```
 
-### 2 - Docker
-
-> #### ⚠️ Prerequisitos
-> 
-> Este entorno virtual requiere de:
-> - [Docker](https://docs.docker.com/engine/install/_) y (docker) compose (que en las nuevas versiones ya viene en la instalación de docker)
-
-#### Instalación
-
-Abrí una terminal del sistema en el directorio raiz del proyecto y construí la imagen de docker
-
-```bash
-$ docker compose build
-```
-
-#### Ejecución
-
-Abrí una terminal del sistema en el directorio raiz del proyecto y ejecutá la imagen en un contenedor
-
-```bash
-$ docker compose up
-```
 
 
 ## Licencia
