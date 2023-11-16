@@ -26,7 +26,9 @@ oceanIcons <- awesomeIconList(
   lluvia = makeAwesomeIcon(text = fa("cloud-showers-heavy"),markerColor="lightblue"),
   agua_corriente = makeAwesomeIcon(text = fa("faucet"),markerColor="blue"),
   vegetal=makeAwesomeIcon(text = fa("leaf"),markerColor="darkgreen"),
-  suelo=makeAwesomeIcon(text = fa("sun-plant-wilt"),markerColor="beige")
+  suelo=makeAwesomeIcon(text = fa("sun-plant-wilt"),markerColor="beige"),
+  aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray")
+
 )
 
 # Calculate the bounding box of the points
@@ -138,7 +140,7 @@ ui <- fluidPage(
     href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"
   ),
   materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T),
-  materialSwitch(inputId = "switch2", label = "Testeos Ambientales Iconos", status = "primary",value=F),
+  materialSwitch(inputId = "switch2", label = "Testeos Ambientales", status = "primary",value=F),
   uiOutput("style"),
   leafletOutput("map", width = "80%", height = "600px")
 )
