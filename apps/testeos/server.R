@@ -30,7 +30,7 @@ oceanIcons <- awesomeIconList(
   vegetal=makeAwesomeIcon(text = fa("leaf"),markerColor="lightgreen"),
   suelo=makeAwesomeIcon(text = fa("mountain"),markerColor="lightgreen"),
   aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray")
-  
+
 )
 
 # Calculate the bounding box of the points

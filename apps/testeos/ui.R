@@ -54,6 +54,7 @@ shinyUI(fluidPage(
     tags$style(style),
     tags$link(rel="icon", type="image/x-icon", href = 'favicon.ico'),
     tags$link(rel = "stylesheet", href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"),
+    tags$title("PIS")
   ),
 
 
