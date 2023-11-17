@@ -22,11 +22,15 @@ amb$type=as.character(amb$type)
 #   suelo=makeIcon("https://www.svgrepo.com/show/227146/soil.svg", iconWidth = 25, iconHeight = 25)
 # )
 oceanIcons <- awesomeIconList(
-  lluvia = makeAwesomeIcon(text = fa("cloud-showers-heavy"),markerColor="lightblue"),
-  agua_corriente = makeAwesomeIcon(text = fa("faucet"),markerColor="blue"),
-  vegetal=makeAwesomeIcon(text = fa("leaf"),markerColor="darkgreen"),
-  suelo=makeAwesomeIcon(text = fa("sun-plant-wilt"),markerColor="beige"),
-  aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray")  
+  agua_pozo = makeAwesomeIcon(text = fa("house-flood-water"),markerColor="lightblue"),
+  agua_superficial = makeAwesomeIcon(text = fa("water"),markerColor="lightblue"),
+  agua_lluvia = makeAwesomeIcon(text = fa("cloud-rain"),markerColor="lightblue"),
+  agua_red = makeAwesomeIcon(text = fa("faucet"),markerColor="lightblue"),
+  sedimento=makeAwesomeIcon(text = fa("mound"),markerColor="lightgreen"),
+  vegetal=makeAwesomeIcon(text = fa("leaf"),markerColor="lightgreen"),
+  suelo=makeAwesomeIcon(text = fa("mountain"),markerColor="lightgreen"),
+  aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray")
+  
 )
 
 # Calculate the bounding box of the points
