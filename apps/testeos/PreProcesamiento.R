@@ -222,10 +222,14 @@ datasf$Long=data$Long
 
 datasf$type=NA
 
-datasf$type[grepl("agua",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="agua_corriente"
-datasf$type[grepl("agua de lluvia",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="lluvia"
+datasf$type[grepl("agua",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="agua_superficial"
+datasf$type[grepl("pozo",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="agua_pozo"
+datasf$type[grepl("superficial",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="agua_superficial"
+datasf$type[grepl("lluvia",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="agua_lluvia"
+datasf$type[grepl("red",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="agua_red"
 datasf$type[grepl("vegetal",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="vegetal"
-datasf$type[grepl("sedimento|suelo",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="suelo"
+datasf$type[grepl("sedimento",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="sedimento"
+datasf$type[grepl("suelo",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="suelo"
 datasf$type[grepl("aire",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="aire"
 
 datasf$type=factor(datasf$type)
