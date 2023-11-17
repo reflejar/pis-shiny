@@ -25,7 +25,8 @@ oceanIcons <- awesomeIconList(
   lluvia = makeAwesomeIcon(text = fa("cloud-showers-heavy"),markerColor="lightblue"),
   agua_corriente = makeAwesomeIcon(text = fa("faucet"),markerColor="blue"),
   vegetal=makeAwesomeIcon(text = fa("leaf"),markerColor="darkgreen"),
-  suelo=makeAwesomeIcon(text = fa("sun-plant-wilt"),markerColor="beige")
+  suelo=makeAwesomeIcon(text = fa("sun-plant-wilt"),markerColor="beige"),
+  aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray")  
 )
 
 # Calculate the bounding box of the points

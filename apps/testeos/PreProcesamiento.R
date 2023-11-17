@@ -5,8 +5,8 @@ library(dplyr)
 library(tidyr)
 library(sfarrow)
 library(arrow)
-
-data=read.xlsx("C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(3).xlsx",sheet = "ORINA",detectDates = TRUE)
+library(leaflet)
+data=read.xlsx("C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(4).xlsx",sheet = "ORINA",detectDates = TRUE)
 names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
 data=data[!(is.na(data$GEORREFERENCIACON)),]
 
@@ -138,37 +138,43 @@ st_write_parquet(honeycomb_count,"./data/hexagonos.parquet")
 
 library(leaflet)
 
-data=read.xlsx("C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(2).xlsx",sheet = "AMBIENTALES",detectDates = TRUE)
-names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
-data=data[!(is.na(data$GEOREFERENCIACION)),]
-
+data=read.xlsx("C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(4).xlsx",sheet = "AMBIENTALES",detectDates = TRUE)
+# names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
+data=data[!(is.na(data$GEOREFERENCIACIÓN)),]
 # names(data)[names(data)=="RESULTADOS"][1]="RESULTADOS1"
 
 #Filtrar data para sacar casos no positivos (version simple por ahora)
 
 
 #CAMBIAR PARA AGREGAR TODAS LAS VARIABLES !!!!!!!!!
-variables=c("Picloram"              ,  "Metomilo"             ,   "Imazapir"              ,  "Imidacloprid",
-            "Dimetoato"             ,  "Atz-OH"                 , "Atz-desisopropil"        ,"Imazetapir",             
-            "Imazapic"              ,  "Pirimicarb"         ,     "Aldicarb"              ,  "Atz-desetil",            
-            "Metsulfuron.Metil"     ,  "Imazaquin"            ,   "Alaclor"               ,  "Diclorvos",              
-            "Carbofuran"            ,  "Metribuzin"         ,     "Diclosulam"            ,  "Carbaril",               
-            "Metalaxil"             ,  "Ametrina"             ,   "Atrazina"              ,  "DEET",                   
-            "Flumioxazin"           ,  "Paration.metil" ,         "Fomesafen"             ,  "Clorimuron.etil",        
-            "Malation"              ,  "Epoxiconazol"     ,       "Triticonazol"          ,  "Flurocloridona" ,        
-            "Metolaclor"            ,  "Acetoclor"            ,   "Clorpirifos-Metil"     ,  "Metconazol",             
-            "Kresoxim.metil"        ,  "Tebuconazol"        ,     "Pirimifos.metil"       ,  "Diazinon",               
-            "Piperonil.butoxido"    ,  "Clorpirifos"        ,     "Tetrametrina"          ,  "Aletrina",               
-            "Pendimentalin"         ,  "Dicamba"                , "Fipronil"              ,  "2,4-DB",                 
-            "2,4-D"                 ,  "Glifosato"            ,   "AMPA"                  ,  "Glufosinato")
+variables=c("Picloram", "Metomilo", "Imazapir", "Imidacloprid",
+              "Dimetoato", "Atz-OH", "Atz-desisopropil", "Imazetapir", 
+              "Imazapic", "Pirimicarb", "Aldicarb", "Atz-desetil",
+              "Metsulfurón.Metil", "Imazaquin", "Alaclor", "Diclorvos",
+              "Carbofuran", "Metribuzin", "Diclosulam", "Carbaril",
+              "Metalaxil", "Ametrina", "Atrazina", "Hidroxiatrazina",
+              "DEET", "Flumioxazin", "Paratión.metil", "Fomesafen",
+              "Clorimurón.etil", "Malatión", "Epoxiconazol", "Azoxystrobina",
+              "Triticonazol", "Flurocloridona", "Metolaclor", "Acetoclor", 
+              "Acetamiprid", "Clorpirifos-Metil", "Metconazol", "Kresoxim.metil",
+              "Tebuconazol", "Pirimifos.metil", "Diazinon", "Piperonil.butóxido",
+              "Clorpirifos", "Tetrametrina", "Aletrina", "Pendimentalin",
+              "Dicamba", "Fipronil", "2,4-DB", "2,4-D", "Halauxifen-M",
+              "Glifosato", "AMPA", "Glufosinato",
+            "POCs", "y-HCH", "β-HCH", "y-Chlordane"             , "α-Chlordane",             "Endosulfán",
+            "α-Endosulfan",           "β-Endosulfan",             "Endosulfán.sulfato",      "p,p’-DDT", 
+            "p,p’-DDE",               "p,p.́-DDD"                , "Aldrin",                  "Dieldrin",
+            "Eldrin",                 "Heptacloro",               "Heptacloro.epóxido",      "Fluorocloridona",
+            "Dietil-toluamida")
 
 filas_con_data <- apply(data, 1, function(x) any(grepl("/", x)))
 data=data[filas_con_data,]
 
 data$FECHA=format(as.Date(data$FECHA), "%d/%m/%Y")
 data=data[,!duplicated(names(data))]
+data[is.na(data)]="-"
 
-data <- separate(data, GEOREFERENCIACION, into = c("Lat", "Long"), sep = ",")
+data <- separate(data, GEOREFERENCIACIÓN, into = c("Lat", "Long"), sep = ",")
 data$Long=as.numeric(data$Long)
 data$Lat=as.numeric(data$Lat)
 
@@ -220,6 +226,7 @@ datasf$type[grepl("agua",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="agua_corrien
 datasf$type[grepl("agua de lluvia",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="lluvia"
 datasf$type[grepl("vegetal",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="vegetal"
 datasf$type[grepl("sedimento|suelo",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="suelo"
+datasf$type[grepl("aire",datasf$SECTOR.AMBIENTAL,ignore.case = T)]="aire"
 
 datasf$type=factor(datasf$type)
 
