@@ -6,7 +6,8 @@ library(tidyr)
 library(sfarrow)
 library(arrow)
 library(leaflet)
-data=read.xlsx("C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(4).xlsx",sheet = "ORINA",detectDates = TRUE)
+archivo_data_testeos="C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(4).xlsx"
+data=read.xlsx(archivo_data_testeos,sheet = "ORINA",detectDates = TRUE)
 names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
 data=data[!(is.na(data$GEORREFERENCIACON)),]
 
@@ -73,16 +74,16 @@ for (i in 1:length(int)){
                        "<b>Glifosato en Orina:  </b>",data$GLIFOSATO.EN.ORINA[filas[j]],
                        " <br>","<b>Glifosato en Orina (AMPA):  </b>",data$`GLIFOSATO.EN.ORINA.(AMPA)`[filas[j]],
                        " <br>","<b>Fecha de Testeo:  </b>",data$FECHA[filas[j]],
-                       " <br>","<center>","<b>LABORATORIO:  </b>",data$LABORATORIO[filas[j]],"</center>",
-                       "<center>","<b>SOLICITANTE:  </b>",data$SOLICITANTE[filas[j]],"</center>"
+                       " <br>","<center>","<b>Laboratorio:  </b>",data$LABORATORIO[filas[j]],"</center>",
+                       "<center>","<b>Solicitante:  </b>",data$SOLICITANTE[filas[j]],"</center>"
         )  
       }else{
         tooltip=paste0(tooltip,"<hr style='margin: 0 ;'>","<center><b style='font-size: 12px;'>Testeo</b> <b style='font-size: 12px;'>",j,"</b>","</center>",
                        "<b>Glifosato en Orina:  </b>",data$GLIFOSATO.EN.ORINA[filas[j]],
                        " <br>","<b>Glifosato en Orina (AMPA):  </b>",data$`GLIFOSATO.EN.ORINA.(AMPA)`[filas[j]],
                        " <br>","<b>Fecha de Testeo:  </b>",data$FECHA[filas[j]],
-                       " <br>","<center>","<b>LABORATORIO:  </b>",data$LABORATORIO[filas[j]],"</center>",
-                       "<center>","<b>SOLICITANTE:  </b>",data$SOLICITANTE[filas[j]],"</center>")  
+                       " <br>","<center>","<b>Laboratorio:  </b>",data$LABORATORIO[filas[j]],"</center>",
+                       "<center>","<b>Solicitante:  </b>",data$SOLICITANTE[filas[j]],"</center>")  
       }
       
       if(j==length(filas)){
@@ -137,8 +138,13 @@ st_write_parquet(honeycomb_count,"./data/hexagonos.parquet")
 ##########  AMBIENTALES  
 
 library(leaflet)
+library(stringr)
 
-data=read.xlsx("C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(4).xlsx",sheet = "AMBIENTALES",detectDates = TRUE)
+data=read.xlsx(archivo_data_testeos,sheet = "AMBIENTALES",detectDates = TRUE)
+data$CITA.PAPER=iconv(data$CITA.PAPER, from = "UTF-8", to = "ASCII//TRANSLIT")
+data$CITA.PAPER=gsub("Dato recuperado del articulo: ","",data$CITA.PAPER)
+
+data$paper_fecha=as.numeric(str_extract(data$CITA.PAPER,  "(?<=\\().+?(?=\\))"))
 # names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
 data=data[!(is.na(data$GEOREFERENCIACIÓN)),]
 # names(data)[names(data)=="RESULTADOS"][1]="RESULTADOS1"
@@ -191,25 +197,45 @@ st_crs(datasf)=st_crs(4326)
 
 datasf$Tooltip=NA
 
+#Poner ancho maximo del texto, para que no se hagan muy anchos los tooltips
+data$CITA.PAPER=gsub("\n", "<br>",stringr::str_wrap(data$CITA.PAPER,width = 45))
+data$SOLICITANTE.DEL.ESTUDIO=gsub("\n", "<br>",stringr::str_wrap(data$SOLICITANTE.DEL.ESTUDIO,width = 45))
+data$LABORATORIO =gsub("\n", "<br>",stringr::str_wrap(data$LABORATORIO,width = 45))
 
 
 
+names(data)
 
 for (i in 1:nrow(data)){
   
   names(data)
   
-  tooltip=paste0("<span style='font-family: Fira Sans,sans-serif; font-size: 14px; line-height:2;'>","<center><b style='font-size: 16px;'>Análisis de ",data$SECTOR.AMBIENTAL[i],"</b></center>","<hr style='margin: 0;'>",
-                 " <br>","<b>Fecha de Testeo:</b>",data$FECHA[i])
-  
-  variables_con_data=variables[which(grepl("/",data[i,variables]))]
-  
-  for(variable in variables_con_data){
-    tooltip=paste0(tooltip,"<br>","<b>",variable,":</b>",data[i,which(names(data)==variable)])
+  if(data$CITA.PAPER[i]=="-"){
+    tooltip=paste0("<span style='font-family: Fira Sans,sans-serif; font-size: 14px; line-height:2;'>","<center><b style='font-size: 16px;'>",data$SECTOR.AMBIENTAL[i],"</b></center>","<hr style='margin: 0;'>",
+                   " <br>","<b>Fecha de Testeo:</b>",data$FECHA[i])
+    
+    variables_con_data=variables[which(grepl("/",data[i,variables]))]
+    
+    for(variable in variables_con_data){
+      tooltip=paste0(tooltip,"<br>","<b>",variable,": </b>",data[i,which(names(data)==variable)])
+    }
+    
+    tooltip=paste0(tooltip,  " <br>","<b>Laboratorio: </b>",data$LABORATORIO[i],"<br>",
+                   "<b>Solicitante:  </b>",data$SOLICITANTE.DEL.ESTUDIO[i])  
+  }else{
+    tooltip=paste0("<span style='font-family: Fira Sans,sans-serif; font-size: 14px; line-height:2;'>","<center><b style='font-size: 16px;'>",data$SECTOR.AMBIENTAL[i],"</b></center>","<hr style='margin: 0;'>",
+                   " <br>","<b>Fecha del Paper: </b>",data$paper_fecha[i])
+    
+    variables_con_data=variables[which(grepl("/",data[i,variables]))]
+    
+    for(variable in variables_con_data){
+      tooltip=paste0(tooltip,"<br>","<b>",variable,": </b>",data[i,which(names(data)==variable)])
+    }
+    
+    tooltip=paste0(tooltip,  " <br>","<b>Cita: </b>",data$CITA.PAPER[i])
   }
   
-  tooltip=paste0(tooltip,  " <br>","<b>Institución: </b>",data$INSTITUCION[i],"<br>",
-                 "<b>Solicitante:  </b>",data$SOLICITANTE[i])
+
   
   datasf$Tooltip[i]=tooltip
  

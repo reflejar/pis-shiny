@@ -54,6 +54,9 @@ palette <- colorBin('Reds', domain = honeycomb_count$n_colli, bins = 5)
 hover=lapply(honeycomb_count$Tooltip, htmltools::HTML)
 hover_markers=lapply(amb$Tooltip, htmltools::HTML)
 
+
+
+
 style <- "
   .hexbin-hexagon {
   	stroke: #000;
