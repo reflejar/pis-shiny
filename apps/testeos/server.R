@@ -28,8 +28,8 @@ oceanIcons <- awesomeIconList(
   agua_red = makeAwesomeIcon(text = fa("faucet"),markerColor="lightblue"),
   sedimento=makeAwesomeIcon(text = fa("mound"),markerColor="lightgreen"),
   vegetal=makeAwesomeIcon(text = fa("leaf"),markerColor="lightgreen"),
-  suelo=makeAwesomeIcon(text = fa("sun-plant-wilt"),markerColor="beige"),
-  aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray")  
+  suelo=makeAwesomeIcon(text = fa("mountain"),markerColor="lightgreen"),
+  aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray")
 
 )
 
