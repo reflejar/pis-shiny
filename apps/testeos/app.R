@@ -52,6 +52,8 @@ palette <- colorBin('Reds', domain = honeycomb_count$n_colli, bins = 5)
 # palette(4)
 
 hover=lapply(honeycomb_count$Tooltip, htmltools::HTML)
+hover_popup=lapply(honeycomb_count$Popup, htmltools::HTML)
+
 hover_markers=lapply(amb$Tooltip, htmltools::HTML)
 
 
@@ -167,8 +169,8 @@ server <- function(input, output, session) {
     leaflet()%>%setView(lat = lat,lng=long,zoom = initial_zoom)%>%
       addMapPane("HexPane",zIndex = 400)%>%
       addPolygons(data=honeycomb_count,fillColor = ~palette(n_colli),
-                  label = hover,popup = hover,
-                  popupOptions = popupOptions(maxHeight ="300",minWidth = "250",
+                  label = hover,popup = hover_popup,
+                  popupOptions = popupOptions(maxHeight ="300",minWidth = "300",
                                               closeOnClick = TRUE),
                   fillOpacity = 0.5,color="black",opacity=1,weight=1,group="Hex",
                   options = pathOptions(pane = "HexPane"),
