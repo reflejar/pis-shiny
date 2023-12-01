@@ -61,6 +61,7 @@ area_honeycomb_grid = st_sf(area_honeycomb_grid) %>%
 int= st_intersects(area_honeycomb_grid, hex_data)
 
 area_honeycomb_grid$Tooltip=NA
+area_honeycomb_grid$Popup=NA
 
 for (i in 1:length(int)){
   
@@ -68,6 +69,9 @@ for (i in 1:length(int)){
   
   if(length(filas)>0){
     tooltip=paste0(  "<span style='font-family: Fira Sans,sans-serif; font-size: 14px; line-height:2;'>","<center><b style='font-size: 16px;'>ANÁLISIS DE ORINA HUMANA</b></center>","<hr style='margin: 0;'>")
+    
+    largo=ifelse(length(filas)>3,3,length(filas))
+    
     for(j in 1:length(filas)){
       if(j==1){
         tooltip=paste0(tooltip,"<center><b style='font-size: 12px;'>Testeo</b> <b style='font-size: 12px;'>",j,"</b>","</center>",
@@ -77,21 +81,44 @@ for (i in 1:length(int)){
                        " <br>","<center>","<b>Laboratorio:  </b>",data$LABORATORIO[filas[j]],"</center>",
                        "<center>","<b>Solicitante:  </b>",data$SOLICITANTE[filas[j]],"</center>"
         )  
-      }else{
+      }else if(j<largo){
         tooltip=paste0(tooltip,"<hr style='margin: 0 ;'>","<center><b style='font-size: 12px;'>Testeo</b> <b style='font-size: 12px;'>",j,"</b>","</center>",
                        "<b>Glifosato en Orina:  </b>",data$GLIFOSATO.EN.ORINA[filas[j]],
                        " <br>","<b>Glifosato en Orina (AMPA):  </b>",data$`GLIFOSATO.EN.ORINA.(AMPA)`[filas[j]],
                        " <br>","<b>Fecha de Testeo:  </b>",data$FECHA[filas[j]],
                        " <br>","<center>","<b>Laboratorio:  </b>",data$LABORATORIO[filas[j]],"</center>",
                        "<center>","<b>Solicitante:  </b>",data$SOLICITANTE[filas[j]],"</center>")  
+      }else if(j==largo){
+        
+        popup=paste0(tooltip,"<hr style='margin: 0 ;'>","<center><b style='font-size: 12px;'>Testeo</b> <b style='font-size: 12px;'>",j,"</b>","</center>",
+                     "<b>Glifosato en Orina:  </b>",data$GLIFOSATO.EN.ORINA[filas[j]],
+                     " <br>","<b>Glifosato en Orina (AMPA):  </b>",data$`GLIFOSATO.EN.ORINA.(AMPA)`[filas[j]],
+                     " <br>","<b>Fecha de Testeo:  </b>",data$FECHA[filas[j]],
+                     " <br>","<center>","<b>Laboratorio:  </b>",data$LABORATORIO[filas[j]],"</center>",
+                     "<center>","<b>Solicitante:  </b>",data$SOLICITANTE[filas[j]],"</center>")
+        tooltip=paste0(tooltip,"<hr style='margin: 0 ;'>","<center><b style='font-size: 12px;'>Click para ver ",ifelse(length(filas)-2==1, "1 resultado más",paste0(length(filas)-2," más resultados")) ,"</b> <b style='font-size: 12px;'>","</b>","</center>")
+  
+      }else if(j>largo){
+      
+        popup=paste0(popup,"<hr style='margin: 0 ;'>","<center><b style='font-size: 12px;'>Testeo</b> <b style='font-size: 12px;'>",j,"</b>","</center>",
+                                     "<b>Glifosato en Orina:  </b>",data$GLIFOSATO.EN.ORINA[filas[j]],
+                                     " <br>","<b>Glifosato en Orina (AMPA):  </b>",data$`GLIFOSATO.EN.ORINA.(AMPA)`[filas[j]],
+                                     " <br>","<b>Fecha de Testeo:  </b>",data$FECHA[filas[j]],
+                                     " <br>","<center>","<b>Laboratorio:  </b>",data$LABORATORIO[filas[j]],"</center>",
+                                     "<center>","<b>Solicitante:  </b>",data$SOLICITANTE[filas[j]],"</center>")  
+          
       }
       
       if(j==length(filas)){
         tooltip=paste0(tooltip,"</span>")
+        popup=paste0(popup,"</span>")
+        
       }
       
     }  
     area_honeycomb_grid$Tooltip[i]=tooltip  
+    area_honeycomb_grid$Popup[i]=popup  
+    
   }
   
 }
@@ -212,7 +239,7 @@ for (i in 1:nrow(data)){
   
   if(data$CITA.PAPER[i]=="-"){
     tooltip=paste0("<span style='font-family: Fira Sans,sans-serif; font-size: 14px; line-height:2;'>","<center><b style='font-size: 16px;'>",data$SECTOR.AMBIENTAL[i],"</b></center>","<hr style='margin: 0;'>",
-                   " <br>","<b>Fecha de Testeo:</b>",data$FECHA[i])
+                   " <br>","<b>Fecha de Testeo: </b>",data$FECHA[i])
     
     variables_con_data=variables[which(grepl("/",data[i,variables]))]
     
