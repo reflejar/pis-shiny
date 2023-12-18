@@ -59,7 +59,30 @@ hover_markers=lapply(amb$Tooltip, htmltools::HTML)
 
 
 
-style <- "
+style <- HTML("
+  .material-switch > label:before {
+      background: rgb(0, 0, 0);
+      box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+      border-radius: 45px;
+      content: '';
+      height: 28px;
+      margin-top: -13.5px;
+      position:absolute;
+      opacity: 0.3;
+      transition: all 0.4s ease-in-out;
+      width: 46px;
+  }
+
+
+
+
+  .label-danger{
+  background-color: #F1405D;
+  }
+  .label-primary{
+  background-color: #D8D87C;
+  }
+
   .hexbin-hexagon {
   	stroke: #000;
   	stroke-width: .5px;
@@ -101,9 +124,33 @@ style <- "
   }`
     
   
-"
+")
 
-style_hidden <- "
+style_hidden <-HTML( "
+
+   .material-switch > label:before {
+      background: rgb(0, 0, 0);
+      box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+      border-radius: 45px;
+      content: '';
+      height: 28px;
+      margin-top: -13.5px;
+      position:absolute;
+      opacity: 0.3;
+      transition: all 0.4s ease-in-out;
+      width: 46px;
+  }
+  
+
+
+
+  .label-danger{
+  background-color: #F1405D;
+  }
+  .label-primary{
+  background-color: #D8D87C;
+  }
+  
   .hexbin-hexagon {
     display:none
   }
@@ -139,7 +186,7 @@ style_hidden <- "
   background-color: rgba(255,0,0, 0.6);
   }`
   
-"
+")
 # Define UI
 ui <- fluidPage(
   tags$head(tags$style(style)),
@@ -147,8 +194,8 @@ ui <- fluidPage(
     rel = "stylesheet", 
     href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"
   ),
-  materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T),
-  materialSwitch(inputId = "switch2", label = "Testeos Ambientales", status = "primary",value=F),
+  materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T,right = T),
+  materialSwitch(inputId = "switch2", label = "Testeos Ambientales", status = "primary",value=F,right=T),
   uiOutput("style"),
   leafletOutput("map", width = "80%", height = "600px")
 )

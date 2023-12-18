@@ -6,42 +6,6 @@ library(shinyWidgets)
 library(sfarrow)
 library(arrow)
 
-style <- "
-  .hexbin-hexagon {
-  	stroke: #000;
-  	stroke-width: .5px;
-  }
-  
-  .hexbin-container:hover .hexbin-hexagon {
-  	transition: 200ms;
-  	stroke: black;
-  	stroke-width: 2px;
-  	stroke-opacity: 1;
-  }
-  
-  .hexbin-tooltip {
-  	padding: 8px;
-  	border-radius: 4px;
-  	border: 1px solid black;
-  	background-color: white;
-  }
-"
-
-style_hidden <- "
-  .hexbin-hexagon {
-    display:none
-  }
-  
-  .hexbin-container:hover .hexbin-hexagon {
-    display:none
-
-  }
-  
-  .hexbin-tooltip {
-    display:none
-
-  }
-"
 
 shinyUI(fluidPage(
   # includeCSS("bootstrap.min.css", rel = 'stylesheet'),
@@ -51,7 +15,7 @@ shinyUI(fluidPage(
   tags$head(
     tags$meta(name="viewport", content="width=device-width, initial-scale=1"),
     tags$link(rel = 'stylesheet', type = 'text/css', href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css'),
-    tags$style(style),
+    tags$link(rel="stylesheet", href = 'custom.css'),
     tags$link(rel="icon", type="image/x-icon", href = 'favicon.ico'),
     tags$link(rel = "stylesheet", href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"),
     tags$title("PIS")
@@ -99,7 +63,7 @@ shinyUI(fluidPage(
 
           tags$div(
             materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T, right = T),
-            materialSwitch(inputId = "switch2", label = "Testeos Ambientales", status = "primary",value=T, right = T),
+            materialSwitch(inputId = "switch2", label = "Testeos Ambientales", status = "primary",value=F, right = T),
             class="mt-3 mb-5 text-white"
           ),
           tags$img(alt="Línea", src="img/linea.svg", class="mt-5 mb-3"),
