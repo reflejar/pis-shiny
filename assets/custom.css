@@ -1,0 +1,70 @@
+.shiny-input-container {
+  width: 300px;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.material-switch>label.switch:before {
+  background: rgb(0, 0, 0);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 45px;
+  content: '';
+  height: 24px;
+  margin-top: -13.5px;
+  position:absolute;
+  opacity: 0.3;
+  transition: all 0.4s ease-in-out;
+  width: 44px;
+}
+
+
+.bg-danger {
+  background-color: #F1405D!important;
+}
+.bg-primary {
+  background-color: #D8D87C!important;
+}
+
+.marker-cluster-small {
+  background-color: rgba(	255,193,0, 0.6);
+  }
+  .marker-cluster-small div {
+  background-color: rgba(255,154,0, 0.6);
+  }
+  
+  .marker-cluster-medium {
+  background-color: rgba(255,154,0, 0.6);
+  }
+  .marker-cluster-medium div {
+  background-color: rgba(255,77,0, 0.6);
+  }
+  
+  .marker-cluster-large {
+  background-color: rgba(255,77,0, 0.6);
+  }
+  .marker-cluster-large div {
+  background-color: rgba(255,0,0, 0.6);
+  }
+
+
+
+/* CSS para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .responsive-map {
+      height: 400px; /* Ajusta la altura según tus necesidades */
+    }
+  }
+  
+  /* CSS para pantallas medianas */
+  @media (min-width: 769px) and (max-width: 1200px) {
+    .responsive-map {
+      height: 500px; /* Ajusta la altura según tus necesidades */
+    }
+  }
+  
+  /* CSS para pantallas más grandes */
+  @media (min-width: 1201px) {
+    .responsive-map {
+      height: 600px; /* Ajusta la altura según tus necesidades */
+    }
+  }
