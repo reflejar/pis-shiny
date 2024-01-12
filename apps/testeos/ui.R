@@ -72,7 +72,7 @@ shinyUI(fluidPage(
             "SUMÁ RASTROS DE PIS",
             tags$br(),
             "Este mapa se construye colaborativamente con estudios, informes e investigaciones provenientes de distintas fuentes. Tiene un enfoque colectivo, participativo y abierto por lo que podes",  
-            tags$a("descargar el dataset", href="#"),
+            tags$a("descargar el dataset", href="data/Testeos.xlsx", target="_blank"),
             "del mapa o aportar información de análisis aquí.",
             class="text-white poppins"            
           ),

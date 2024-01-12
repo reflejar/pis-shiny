@@ -6,14 +6,27 @@ library(tidyr)
 library(sfarrow)
 library(arrow)
 library(leaflet)
+
+
+#   !!!!!!      IMPORTANTE  !!!!!!!!!!!!!!
+
+#NO SUBIR ESTA BASE A GITHUB PORQUE CONTIENE DATOS SENSIBLES. TRABAJARLA SIEMPRE DESDE LA COMPUTADORA LOCAL !!!!!!!!!
+
+
+
 archivo_data_testeos="C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(4).xlsx"
 data=read.xlsx(archivo_data_testeos,sheet = "ORINA",detectDates = TRUE)
 names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
-data=data[!(is.na(data$GEORREFERENCIACON)),]
 
 # names(data)[names(data)=="RESULTADOS"][1]="RESULTADOS1"
 
+#Guardar data para descargar en la pagina
+columnas_para_descargar <- c( "LOCALIDAD/POBLADO", "FECHA", "SOLICITANTE", "LABORATORIO", "GLIFOSATO.EN.ORINA", "GLIFOSATO.EN.ORINA.(AMPA)", "TOTAL.DE.HERBICIDAS.EN.ORINA", "CLORIMURON", "METIL.METSULFURON", "PROSULFURON", "SULFOMETURON", "IODOSULFURON-METIL", "IMAZETAPYR", "IMAZAPYR", "IMAZAPYC", "IMAZAQUIN", "IMAZAMOX", "2,4-D", "DICAMBA", "PICLORAN", "MCPA", "FLUROXYPYR", "2,3,5-TRICLOROBENCENO", "DICLOSULAM", "PIROXULAM", "ATRAZINA", "PROMETRINA", "METRIBUZIN", "LINURON", "METOLACLOR", "FOMESAFEN", "AMICARBAZONE", "TOPRAMEZONE", "SULFENTRAZONE", "DIFLUFENICAN")
+data_descarga=data[,names(data) %in% columnas_para_descargar]
+write.csv(data_descarga,"./data/Testeos_Humanos_Descarga.csv")
+
 #Filtrar data para sacar casos no positivos (version simple por ahora)
+data=data[!(is.na(data$GEORREFERENCIACON)),]
 
 data=data[grepl("/",data$GLIFOSATO.EN.ORINA)|grepl("/",data$`GLIFOSATO.EN.ORINA.(AMPA)`),]
 data$FECHA=format(as.Date(data$FECHA), "%d/%m/%Y")
@@ -168,6 +181,25 @@ library(leaflet)
 library(stringr)
 
 data=read.xlsx(archivo_data_testeos,sheet = "AMBIENTALES",detectDates = TRUE)
+
+
+# Create a new workbook
+wb <- createWorkbook()
+
+# Add the first data frame to a new worksheet
+addWorksheet(wb, "Testeos_Humanos")
+writeData(wb, "Testeos_Humanos", data_descarga)
+
+# Add the second data frame to a new worksheet
+addWorksheet(wb, "Testeos_Ambientales")
+writeData(wb, "Testeos_Ambientales", data)
+
+# Save the workbook to an Excel file
+saveWorkbook(wb, "./data/Testeos.xlsx", overwrite = TRUE)
+
+
+
+
 data$CITA.PAPER=iconv(data$CITA.PAPER, from = "UTF-8", to = "ASCII//TRANSLIT")
 data$CITA.PAPER=gsub("Dato recuperado del articulo: ","",data$CITA.PAPER)
 
