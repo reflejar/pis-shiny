@@ -181,7 +181,23 @@ library(leaflet)
 library(stringr)
 
 data=read.xlsx(archivo_data_testeos,sheet = "AMBIENTALES",detectDates = TRUE)
-write.csv(data,"./data/Testeos_Ambientales_Descarga.csv")
+
+
+# Create a new workbook
+wb <- createWorkbook()
+
+# Add the first data frame to a new worksheet
+addWorksheet(wb, "Testeos_Humanos")
+writeData(wb, "Testeos_Humanos", data_descarga)
+
+# Add the second data frame to a new worksheet
+addWorksheet(wb, "Testeos_Ambientales")
+writeData(wb, "Testeos_Ambientales", data)
+
+# Save the workbook to an Excel file
+saveWorkbook(wb, "./data/Testeos.xlsx", overwrite = TRUE)
+
+
 
 
 data$CITA.PAPER=iconv(data$CITA.PAPER, from = "UTF-8", to = "ASCII//TRANSLIT")
