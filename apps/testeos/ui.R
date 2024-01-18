@@ -64,7 +64,7 @@ shinyUI(fluidPage(
 
           tags$div(
             materialSwitch(inputId = "switch1", label = "Testeos Humanos", status = "danger",value=T, right = T),
-            materialSwitch(inputId = "switch2", label = "Testeos Ambientales", status = "primary",value=F, right = T),
+            materialSwitch(inputId = "switch2", label = "Testeos Ambientales", status = "primary",value=T, right = T),
             class="mt-3 mb-5 text-white"
           ),
           tags$img(alt="Línea", src="img/linea.svg", class="mt-5 mb-3"),

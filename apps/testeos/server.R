@@ -26,10 +26,11 @@ oceanIcons <- awesomeIconList(
   agua_superficial = makeAwesomeIcon(text = fa("water"),markerColor="lightblue"),
   agua_lluvia = makeAwesomeIcon(text = fa("cloud-rain"),markerColor="lightblue"),
   agua_red = makeAwesomeIcon(text = fa("faucet"),markerColor="lightblue"),
-  sedimento=makeAwesomeIcon(text = fa("mound"),markerColor="lightgreen"),
+  sedimento=makeAwesomeIcon(text = fa("mountain"),markerColor="lightgreen"),
   vegetal=makeAwesomeIcon(text = fa("leaf"),markerColor="lightgreen"),
-  suelo=makeAwesomeIcon(text = fa("mountain"),markerColor="lightgreen"),
-  aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray")
+  suelo=makeAwesomeIcon(text = fa("mound"),markerColor="lightgreen"),
+  aire=makeAwesomeIcon(text = fa("wind"),markerColor="gray"),
+  peces=makeAwesomeIcon(text = fa("fish"),markerColor="beige")
 
 )
 
@@ -249,7 +250,7 @@ shinyServer(function(input, output, session) {
     if (input$switch2) {
       proxy %>% clearGroup("Ambientales2")
       
-      proxy %>% addAwesomeMarkers(data=amb,lat=~Lat,lng=~Long,label=hover_markers,icon = ~oceanIcons[type],
+      proxy %>% addAwesomeMarkers(data=amb,lat=~Lat,lng=~Long,label=hover_markers, popup=hover_markers,icon = ~oceanIcons[type],
                                  group = "Ambientales",clusterOptions = markerClusterOptions(spiderfyOnMaxZoom=T,disableClusteringAtZoom=11,
                                                                                              removeOutsideVisibleBounds=T))
     } else {
