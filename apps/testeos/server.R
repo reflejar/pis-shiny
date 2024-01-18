@@ -250,7 +250,9 @@ shinyServer(function(input, output, session) {
     if (input$switch2) {
       proxy %>% clearGroup("Ambientales2")
       
-      proxy %>% addAwesomeMarkers(data=amb,lat=~Lat,lng=~Long,label=hover_markers, popup=hover_markers,icon = ~oceanIcons[type],
+      proxy %>% addAwesomeMarkers(data=amb,lat=~Lat,lng=~Long,label=hover_markers, popup=hover_markers,
+                                  popupOptions = popupOptions(maxHeight ="400",minWidth = "300",
+                                  closeOnClick = TRUE),icon = ~oceanIcons[type],
                                  group = "Ambientales",clusterOptions = markerClusterOptions(spiderfyOnMaxZoom=T,disableClusteringAtZoom=11,
                                                                                              removeOutsideVisibleBounds=T))
     } else {
