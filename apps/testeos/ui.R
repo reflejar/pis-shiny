@@ -73,7 +73,7 @@ shinyUI(fluidPage(
             tags$br(),
             "Este mapa se construye colaborativamente con estudios, informes e investigaciones provenientes de distintas fuentes. Tiene un enfoque colectivo, participativo y abierto por lo que podes",  
             tags$a("descargar el dataset", href="data/Testeos.xlsx", target="_blank"),
-            "del mapa o aportar información de análisis aquí.",
+            "del mapa o aportar información de análisis.",
             class="text-white poppins"            
           ),
           tags$a(
@@ -100,18 +100,34 @@ shinyUI(fluidPage(
     tags$div(
       tags$div(
         tags$h5(tags$strong("METODOLOGÍA & PRODUCTO"), tags$span("V1.0", class="badge bg-primary text-black mx-3"), class="text-white pt-3 space-grotesk"),
-        tags$p("Esta herramienta es un sistema de información geográfica (GIS) para mapear colaborativamente detección de agroquímicos en humanos , animales y ambiente. Se grafican datos anonimizados para georeferenciar el resultado tanto de análisis de orina que detectan trazas de plaguicidas en humanos, como también distintos análisis sobre la presencia de estos en el ambiente. Podemos clasificar a los análisis ambientales los podemos clasificar en 7 subtipos:"),
+        tags$p("Esta herramienta es un sistema de información geográfica (GIS) para mapear colaborativamente la ", tags$b("detección de agroquímicos en humanos, animales y el ambiente. ")),
+        tags$p("Se visualizan datos anonimizados que georreferencian los resultados tanto de análisis de orina, que revelan trazas de plaguicidas en humanos, así como también distintos análisis sobre la presencia de estos en el ambiente. Los análisis ambientales se dividen en 8 subtipos, cada uno de estos se ubicarán en el mapa con su icono correspondiente:"),
+        tags$p(tags$b("Ambientales")),
         tags$ul(
-          tags$li(tags$i(class="fa fa-faucet"), "Análisis de agua de red."),
-          tags$li(tags$i(class="fa fa-house-flood-water"), "Análisis de agua de pozo."),
-          tags$li(tags$i(class="fa fa-water"),"Análisis de agua superficial."),
-          tags$li(tags$i(class="fa fa-cloud-rain"), "Análisis de agua de lluvia."),
-          tags$li(tags$i(class="fa fa-mountain"), "Análisis de sedimentos."),
-          tags$li(tags$i(class="fa fa-mound"), "Análisis de suelo."),
-          tags$li(tags$i(class="fa fa-leaf"), "Análisis de material vegetal."),
-          tags$li(tags$i(class="fa fa-fish"), "Análisis en peces."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de agua de red", height="35px", src="img/iconos/agua_red.svg")), "Análisis de agua de red."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de agua de pozo", height="35px", src="img/iconos/agua_pozo.svg")), "Análisis de agua de pozo."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de agua superficial.", height="35px", src="img/iconos/agua_superficial.svg")), "Análisis de agua superficial."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de agua de lluvia.", height="35px", src="img/iconos/agua_lluvia.svg")), "Análisis de agua de lluvia."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de sedimentos.", height="35px", src="img/iconos/sedimentos.svg")), "Análisis de sedimentos."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de suelo.", height="35px", src="img/iconos/suelo.svg")), "Análisis de suelo."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de material vegetal.", height="35px", src="img/iconos/materia_vegetal.svg")), "Análisis de material vegetal."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis en peces.", height="35px", src="img/iconos/peces.svg")), "Análisis en peces."),
         ),
-        tags$p("El mapa posee información proveniente de distintas fuentes. Investigaciones científicas, estudios realizados por comunidades u organizaciones del territorio, muestras de análisis hechos por individuos particulares y resultados de una investigación realizada por P.I.S de más de 200 testeos realizados en las localidades de Lobos, Mar Chiquita, Saladillo, La Matanza y CABA. Cada dato se encuentra mapeado con su resultado, su fuente correspondiente y una pequeña descripción que amplía su información."),
+        tags$p(tags$b("Ambientales")),
+        tags$ul(
+          tags$li(tags$i(tags$img(alt="Ícono de análisis en peces", height="35px", src="img/iconos/peces.svg")), "Análisis de peces."),
+        ),
+        tags$p("Al ingresar al mapa, se observarán zonas coloreadas con números que indican la cantidad de muestras en esas áreas. Estas zonas integran varios resultados superpuestos y a medida que se acerca el zoom, se revelan iconos o hexágonos según corresponda, proporcionando detalles específicos de cada análisis o testeo."), 
+        tags$ul(
+          tags$li(tags$i(tags$img(alt="Ícono de grupos de testeos ambientales", height="35px", src="img/iconos/grupos_ambientales.svg")), "Grupo de testeos ambientales."),
+        ),        
+        tags$p("Por su parte los estudios de agroquímicos en humanos, se mostrarán como hexágonos distribuidos aleatoriamente en un rango previamente establecido de 5 km desde su ubicación original. (Todos los estudios en humanos se encuentran debidamente anonimizados, resguardando toda información sensible)."), 
+        tags$ul(
+          tags$li(tags$i(tags$img(alt="Ícono de grupos de testeos en humanos", height="35px", src="img/iconos/grupos_humanos.svg")), "Grupo de testeos positivos en Humanos."),
+        ),
+        tags$p(tags$i("Las áreas con una mayor concentración de casos positivos aparecerán con tonalidades más oscuras, mientras que aquellas con menos casos se visualizarán de manera más clara. "), class="w-50"),                
+        tags$img(alt="Ícono de barra de peligrosidad", width="200px", src="img/iconos/barra.svg"),
+        tags$p(tags$i("El mapa posee información proveniente de distintas fuentes. Investigaciones científicas, estudios realizados por comunidades u organizaciones del territorio, muestras de análisis hechos por individuos particulares y resultados de testeos propios realizados en el marco del Proyecto PIS. Cada dato se encuentra mapeado con su resultado, su fuente correspondiente y una pequeña descripción que amplía su información (cada muestra posee fecha, entidad solicitante y laboratorio que hizo el estudio).")),
         class="col-12 text-white mt-5", id="metodologia-testeos"
       ),
       class="row"
