@@ -111,7 +111,7 @@ shinyUI(fluidPage(
           tags$li(tags$i(tags$img(alt="Ícono de análisis de sedimentos.", height="35px", src="img/iconos/sedimentos.svg")), "Análisis de sedimentos."),
           tags$li(tags$i(tags$img(alt="Ícono de análisis de suelo.", height="35px", src="img/iconos/suelo.svg")), "Análisis de suelo."),
           tags$li(tags$i(tags$img(alt="Ícono de análisis de material vegetal.", height="35px", src="img/iconos/materia_vegetal.svg")), "Análisis de material vegetal."),
-          tags$li(tags$i(tags$img(alt="Ícono de análisis en peces.", height="35px", src="img/iconos/peces.svg")), "Análisis en peces."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de particulas de aire.", height="35px", src="img/iconos/particulas_aire.svg")), "Análisis de Particulas de aire."),
         ),
         tags$p(tags$b("Ambientales")),
         tags$ul(
