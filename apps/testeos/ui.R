@@ -44,13 +44,13 @@ shinyUI(fluidPage(
     tags$div(
         tags$div(
           tags$h3(
-            "Mapa colaborativo de testeos",
+            "Testeos",
             tags$a("V 1.0", href="#metodologia-testeos", class="btn btn-sm text-primary"),
             class="text-white pt-3 fw-bolder space-grotesk"
           ),
           tags$br(),
           tags$p(
-            "Resultados de análisis e informes de trazas de agroquímicos. Buscá en el mapa y observá la presencia de agroquímicos en humanos, agua y territorios de la provincia de Buenos Aires.",
+            "Sistema de información geográfica colaborativo de detecciones de agroquímicos en humanos, animales, agua, sedimentos y material vegetal. Buscá en el mapa y observá los reportes de presencia de agroquímicos en territorios de la Provincia de Buenos Aires.",
             class="text-white poppins"
           ),
           class="col-12 mt-5"          
