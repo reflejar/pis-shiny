@@ -19,7 +19,16 @@ shinyUI(fluidPage(
     tags$link(rel="stylesheet", href = 'custom.css'),
     tags$link(rel="icon", type="image/x-icon", href = 'favicon.ico'),
     tags$link(rel = "stylesheet", href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"),
-    tags$title("PIS")
+    tags$title("PIS"),
+    tags$head(
+      tags$script(
+        src = "https://www.googletagmanager.com/gtag/js?id=G-4SVX2N6H9Z",
+        async = ""
+      ),
+      tags$script(
+        src = "js/gtag.js"
+      )
+    )
   ),
 
 
@@ -111,16 +120,18 @@ shinyUI(fluidPage(
           tags$li(tags$i(tags$img(alt="Ícono de análisis de sedimentos.", height="35px", src="img/iconos/sedimentos.svg")), "Análisis de sedimentos."),
           tags$li(tags$i(tags$img(alt="Ícono de análisis de suelo.", height="35px", src="img/iconos/suelo.svg")), "Análisis de suelo."),
           tags$li(tags$i(tags$img(alt="Ícono de análisis de material vegetal.", height="35px", src="img/iconos/materia_vegetal.svg")), "Análisis de material vegetal."),
-          tags$li(tags$i(tags$img(alt="Ícono de análisis en peces.", height="35px", src="img/iconos/peces.svg")), "Análisis en peces."),
+          tags$li(tags$i(tags$img(alt="Ícono de análisis de particulas de aire.", height="35px", src="img/iconos/particulas_aire.svg")), "Análisis de Particulas de aire."),
         ),
         tags$p(tags$b("Ambientales")),
         tags$ul(
           tags$li(tags$i(tags$img(alt="Ícono de análisis en peces", height="35px", src="img/iconos/peces.svg")), "Análisis de peces."),
         ),
+        tags$p(tags$b("Testeos ambientales superpuestos", class="text-uppercase")),
         tags$p("Al ingresar al mapa, se observarán zonas coloreadas con números que indican la cantidad de muestras en esas áreas. Estas zonas integran varios resultados superpuestos y a medida que se acerca el zoom, se revelan iconos o hexágonos según corresponda, proporcionando detalles específicos de cada análisis o testeo."), 
         tags$ul(
           tags$li(tags$i(tags$img(alt="Ícono de grupos de testeos ambientales", height="35px", src="img/iconos/grupos_ambientales.svg")), "Grupo de testeos ambientales."),
-        ),        
+        ),
+        tags$p(tags$b("Testeos en Humanos", class="text-uppercase")),
         tags$p("Por su parte los estudios de agroquímicos en humanos, se mostrarán como hexágonos distribuidos aleatoriamente en un rango previamente establecido de 5 km desde su ubicación original. (Todos los estudios en humanos se encuentran debidamente anonimizados, resguardando toda información sensible)."), 
         tags$ul(
           tags$li(tags$i(tags$img(alt="Ícono de grupos de testeos en humanos", height="35px", src="img/iconos/grupos_humanos.svg")), "Grupo de testeos positivos en Humanos."),
