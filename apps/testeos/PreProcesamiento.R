@@ -14,7 +14,7 @@ library(leaflet)
 
 
 
-archivo_data_testeos="C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(4).xlsx"
+archivo_data_testeos="C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(5).xlsx"
 data=read.xlsx(archivo_data_testeos,sheet = "ORINA",detectDates = TRUE)
 names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
 
