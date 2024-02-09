@@ -81,7 +81,7 @@ shinyUI(fluidPage(
             "SUMÁ RASTROS DE PIS",
             tags$br(),
             "Este mapa se construye colaborativamente con estudios, informes e investigaciones provenientes de distintas fuentes. Tiene un enfoque colectivo, participativo y abierto por lo que podes",  
-            tags$a("descargar el dataset", href="data/Testeos.xlsx", target="_blank"),
+            tags$a("descargar el dataset", href="https://docs.google.com/spreadsheets/u/1/d/1IBAYC8rleTYOV02HJ3ZDNDtIlRQZheXk/edit#gid=1161902790", target="_blank"),
             "del mapa o aportar información de análisis.",
             class="text-white poppins"            
           ),
@@ -139,6 +139,8 @@ shinyUI(fluidPage(
         tags$p(tags$i("Las áreas con una mayor concentración de casos positivos aparecerán con tonalidades más oscuras, mientras que aquellas con menos casos se visualizarán de manera más clara. "), class="w-50"),                
         tags$img(alt="Ícono de barra de peligrosidad", width="200px", src="img/iconos/barra.svg"),
         tags$p(tags$i("El mapa posee información proveniente de distintas fuentes. Investigaciones científicas, estudios realizados por comunidades u organizaciones del territorio, muestras de análisis hechos por individuos particulares y resultados de testeos propios realizados en el marco del Proyecto PIS. Cada dato se encuentra mapeado con su resultado, su fuente correspondiente y una pequeña descripción que amplía su información (cada muestra posee fecha, entidad solicitante y laboratorio que hizo el estudio).")),
+        tags$p(tags$i('*Este proyecto posee un enfoque colectivo, participativo y abierto. Si encontraste algún error o información desactualizada comunícate a ', tags$a("contacto@democraciaenred.org",href="mailto:contacto@democraciaenred.org"))),
+        tags$p(tags$i('Acede al data set de esta herramienta ', tags$a("acá", href="https://docs.google.com/spreadsheets/u/1/d/1IBAYC8rleTYOV02HJ3ZDNDtIlRQZheXk/edit#gid=1161902790", target="_blank"))),        
         class="col-12 text-white mt-5", id="metodologia-testeos"
       ),
       class="row"
