@@ -59,7 +59,7 @@ shinyUI(fluidPage(
           ),
           tags$br(),
           tags$p(
-            "Sistema de información geográfica colaborativo de detecciones de agroquímicos en humanos, animales, agua, sedimentos y material vegetal. Buscá en el mapa y observá los reportes de presencia de agroquímicos en territorios de la Provincia de Buenos Aires.",
+            "Sistema de información geográfica colaborativo de detecciones de agroquímicos en humanos, animales, agua, sedimentos y material vegetal.", tags$br(), "Buscá en el mapa y observá los reportes de presencia de agroquímicos en territorios de la Provincia de Buenos Aires.",
             class="text-white poppins"
           ),
           class="col-12 mt-5"          
