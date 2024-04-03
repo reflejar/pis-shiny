@@ -59,7 +59,7 @@ shinyUI(fluidPage(
           ),
           tags$br(),
           tags$p(
-            "Sistema de información geográfica colaborativo de detecciones de agroquímicos en humanos, animales, agua, sedimentos y material vegetal. Buscá en el mapa y observá los reportes de presencia de agroquímicos en territorios de la Provincia de Buenos Aires.",
+            "Sistema de información geográfica colaborativo de detecciones de agroquímicos en humanos, animales, agua, sedimentos y material vegetal.", tags$br(), "Buscá en el mapa y observá los reportes de presencia de agroquímicos en territorios de la Provincia de Buenos Aires.",
             class="text-white poppins"
           ),
           class="col-12 mt-5"          
@@ -122,7 +122,7 @@ shinyUI(fluidPage(
           tags$li(tags$i(tags$img(alt="Ícono de análisis de material vegetal.", height="35px", src="img/iconos/materia_vegetal.svg")), "Análisis de material vegetal."),
           tags$li(tags$i(tags$img(alt="Ícono de análisis de particulas de aire.", height="35px", src="img/iconos/particulas_aire.svg")), "Análisis de Particulas de aire."),
         ),
-        tags$p(tags$b("Ambientales")),
+        tags$p(tags$b("Animales")),
         tags$ul(
           tags$li(tags$i(tags$img(alt="Ícono de análisis en peces", height="35px", src="img/iconos/peces.svg")), "Análisis de peces."),
         ),

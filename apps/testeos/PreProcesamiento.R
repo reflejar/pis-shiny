@@ -14,7 +14,7 @@ library(leaflet)
 
 
 
-archivo_data_testeos="C:/Users/simon/Downloads/BASE_ANALISIS_AMBIENTALESyORINA(5).xlsx"
+archivo_data_testeos="C:/Users/simon/Downloads/BaseTesteos_Completa.xlsx"
 data=read.xlsx(archivo_data_testeos,sheet = "ORINA",detectDates = TRUE)
 names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
 
@@ -23,7 +23,7 @@ names(data)=iconv(names(data), from = "UTF-8", to = "ASCII//TRANSLIT")
 #Guardar data para descargar en la pagina
 columnas_para_descargar <- c( "LOCALIDAD/POBLADO", "FECHA", "SOLICITANTE", "LABORATORIO", "GLIFOSATO.EN.ORINA", "GLIFOSATO.EN.ORINA.(AMPA)", "TOTAL.DE.HERBICIDAS.EN.ORINA", "CLORIMURON", "METIL.METSULFURON", "PROSULFURON", "SULFOMETURON", "IODOSULFURON-METIL", "IMAZETAPYR", "IMAZAPYR", "IMAZAPYC", "IMAZAQUIN", "IMAZAMOX", "2,4-D", "DICAMBA", "PICLORAN", "MCPA", "FLUROXYPYR", "2,3,5-TRICLOROBENCENO", "DICLOSULAM", "PIROXULAM", "ATRAZINA", "PROMETRINA", "METRIBUZIN", "LINURON", "METOLACLOR", "FOMESAFEN", "AMICARBAZONE", "TOPRAMEZONE", "SULFENTRAZONE", "DIFLUFENICAN")
 data_descarga=data[,names(data) %in% columnas_para_descargar]
-write.csv(data_descarga,"./data/Testeos_Humanos_Descarga.csv")
+# write.csv(data_descarga,"./data/Testeos_Humanos_Descarga.csv")
 
 #Filtrar data para sacar casos no positivos (version simple por ahora)
 data=data[!(is.na(data$GEORREFERENCIACON)),]
@@ -195,7 +195,7 @@ addWorksheet(wb, "Testeos_Ambientales")
 writeData(wb, "Testeos_Ambientales", data)
 
 # Save the workbook to an Excel file
-saveWorkbook(wb, "./data/Testeos.xlsx", overwrite = TRUE)
+# saveWorkbook(wb, "./data/Testeos.xlsx", overwrite = TRUE)
 
 
 
